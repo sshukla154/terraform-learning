@@ -1,9 +1,9 @@
 # Configure the AWS Provider
-provider "aws" {
-  region     = "us-east-1"
-  access_key = ""
-  secret_key = ""
-}
+# provider "aws" {
+#   region     = "us-east-1"
+#   access_key = ""
+#   secret_key = ""
+# }
 
 #Configure resource: resource "<provider>_<resource_type>" "name"{
     # Configure Options...
@@ -13,14 +13,13 @@ provider "aws" {
 #}
 
 #Example below to deploy EC one instances within AWS
-
-# resource "aws_instance" "my-first-server" {
-#   ami           = "ami-08d4ac5b634553e16"
-#   instance_type = "t2.micro"
-#   tags = {
-#     Name = "ubuntu-server"
-#   }
-# }
+resource "aws_instance" "my-first-server" {
+  ami           = "ami-08d4ac5b634553e16"
+  instance_type = "t2.micro"
+  tags = {
+    Name = "ubuntu-server"
+  }
+}
 
 #Example below to deploy VPC within AWS
 resource "aws_vpc" "my-first-vpc" {
