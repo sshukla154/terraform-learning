@@ -1,6 +1,6 @@
 # Configure the AWS Provider
 # provider "aws" {
-#   region     = "us-east-1"
+#   region     = ""
 #   access_key = ""
 #   secret_key = ""
 # }
@@ -17,7 +17,7 @@ resource "aws_instance" "my-first-server" {
   ami           = "ami-08d4ac5b634553e16"
   instance_type = "t2.micro"
   tags = {
-    Name = "ubuntu-server"
+    Name = "${var.tags[0]}"
   }
 }
 
@@ -25,8 +25,12 @@ resource "aws_instance" "my-first-server" {
 resource "aws_vpc" "my-first-vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "my-test-Virtual-Private-Cloud"
+    Name = "${var.tags[1]}"
   }
+}
+
+output "output-aws-vpc" {
+    value = aws_vpc.my-first-vpc.cidr_block
 }
 
 #Example below to deploy Subnet for above VPC within AWS
@@ -35,6 +39,14 @@ resource "aws_subnet" "my-first-subnet-1" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "my-test-subnet"
+    Name = "${var.tags[2]}"
   }
+}
+
+output "output-aws_subnet_cidr" {
+    value = aws_subnet.my-first-subnet-1.cidr_block
+}
+
+output "output-aws_subnet_tag" {
+    value = aws_subnet.my-first-subnet-1.tags
 }
